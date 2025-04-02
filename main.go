@@ -38,5 +38,5 @@ func main() {
 	router.GET("/books", getBooks)
 	router.GET("/health", healthCheck)
 	router.POST("/books", postBook)
-	router.Run("localhost:8080")
+	router.Run("0.0.0.0:8080")
 }
