@@ -18,6 +18,9 @@ var books = []book{
 	{ID: uuid.New().String(), Title: "The Kubernetes Book", Author: "Nigel Poulton"},
 }
 
+func healthCheck(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, gin.H{"status": "UP"})
+}
 func getBooks(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, books)
 }
@@ -33,7 +36,7 @@ func postBook(c *gin.Context) {
 func main() {
 	router := gin.Default()
 	router.GET("/books", getBooks)
+	router.GET("/health", healthCheck)
 	router.POST("/books", postBook)
-
 	router.Run("localhost:8080")
 }
