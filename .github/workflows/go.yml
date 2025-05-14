@@ -1,22 +1,31 @@
-name: Go
-
-on:
-  push:
-    branches: [master]
-
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      binary_name: web-serv
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
           go-version: '1.21'
-
-      - name: Build binary
+      - name: Build
         run: go build -o web-serv .
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-serv
+          path: web-serv
+
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download binary
+        uses: actions/download-artifact@v4
+        with:
+          name: web-serv
 
       - name: Docker Login
         uses: docker/login-action@v2
