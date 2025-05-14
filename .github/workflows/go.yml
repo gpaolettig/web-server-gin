@@ -1,7 +1,8 @@
 name: Go
+
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
 
@@ -10,14 +11,15 @@ jobs:
     outputs:
       binary: web-serv
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Go
-      uses: actions/setup-go@v4
-      with:
-        go-version: '1.24.1'
-    - name: Build
-      run: go build -o web-serv .
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24.1'
+      - name: Build
+        run: go build -o web-serv .
+
   push:
     needs: build
     runs-on: ubuntu-latest
