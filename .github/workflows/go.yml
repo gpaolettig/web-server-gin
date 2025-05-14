@@ -35,5 +35,3 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/web-server-gin:latest
-          build-args:
-            BINARY_NAME: web-serv
