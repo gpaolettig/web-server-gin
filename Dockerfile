@@ -1,11 +1,7 @@
 FROM alpine:latest
-
 WORKDIR /app
-
 COPY web-serv .
-
 EXPOSE 8080
-
-ENTRYPOINT ["/app/web-serv"]
+ENTRYPOINT ["./web-serv"]
 
 
